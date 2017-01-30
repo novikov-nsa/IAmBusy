@@ -22,9 +22,26 @@ namespace IAmBusy
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public WorkWithFile configFile { get; set; } 
+        public DataAccess dataAccess { get; set; }
+        public string mText;
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            /*configFile = new WorkWithFile();
+            configFile.CheckFileIsExist();
+            //string fname = configFile.filename;
+            configFile.getTextFromFile(configFile.messageText);
+            this.TextBoxMessagetext.Text = configFile.messageTextFromFile;*/
+
+            dataAccess = new DataAccess();
+            dataAccess.ValidateFile();
+            dataAccess.ReadFromFile(mText);
+            dataAccess.messageText = mText; //DataAccess.defaultMessageText;
+            TextBoxMessagetext.Text = dataAccess.messageText;
+
         }
     }
 }

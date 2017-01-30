@@ -11,12 +11,14 @@ namespace IAmBusy
 {
     public partial class WorkWithFile
     {
-        public string filename = "messageText.dat";
+        public const string filename = "messageText.dat";
         public const string defaultText = "Я на данный момент занят, перезвоню позже";
         public string messageText = null;
         public StorageFolder storageFolder = null;
         public StorageFile storageFileName = null;
         public StorageFile dataFile = null;
+        public string messageTextFromFile;
+
 
         public async void CheckFileIsExist() //Проверка существует ли файл
         {
@@ -31,7 +33,7 @@ namespace IAmBusy
                 Debug.WriteLine("Файл не существует");
                 CreateNewFile();
                 messageText = defaultText;
-                WriteToConfigFile();
+                WriteToConfigFile(messageText);
             }
         }
 
@@ -41,20 +43,27 @@ namespace IAmBusy
             storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             storageFileName = await storageFolder.CreateFileAsync(filename, Windows.Storage.CreationCollisionOption.ReplaceExisting);
             Debug.WriteLine("Файл создан " + filename);
+            messageText = defaultText;
+            await FileIO.WriteTextAsync(storageFileName, messageText);
         }
 
 
-        public async void ReadFromConfigFile()
+        
+        public async void getTextFromFile(string messageText)
         {
-            Debug.WriteLine("");
-            
-            
-            //чтение параметров из конфигюфайла
+            dataFile = await storageFolder.GetFileAsync(filename);
+            Debug.WriteLine("Получили значение свойства с именем файла " + filename);
+
+            messageText = await FileIO.ReadTextAsync(dataFile);
+            Debug.WriteLine("Прочитали значение из файла " + filename);
+            Debug.WriteLine("В файле хранится значение" + messageText);
+            this.messageTextFromFile = messageText;
         }
 
         public async void WriteToConfigFile(string messageText) //запись измененных параметров в конфиг.файл
         {
             await Windows.Storage.FileIO.WriteTextAsync(storageFileName, messageText);
+            Debug.WriteLine("Записано значение "+messageText);
         }
 
 
