@@ -22,10 +22,10 @@ namespace IAmBusy
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public WorkWithFile configFile { get; set; } 
-        public DataAccess dataAccess { get; set; }
-        public string mText;
-
+        //public WorkWithFile configFile { get; set; }
+        public DataAccess dataAccess;
+        public string s;
+        
         public MainPage()
         {
             this.InitializeComponent();
@@ -38,9 +38,15 @@ namespace IAmBusy
 
             dataAccess = new DataAccess();
             dataAccess.ValidateFile();
-            dataAccess.ReadFromFile(mText);
-            dataAccess.messageText = mText; //DataAccess.defaultMessageText;
-            TextBoxMessagetext.Text = dataAccess.messageText;
+            dataAccess.ReadFromFile();
+            s = dataAccess.messageText;
+            //s = DataAccess.mText;
+            if (s != null)
+            {
+                TextBoxMessagetext.Text = s;
+            }
+            //DataAccess.defaultMessageText;
+            //
 
         }
     }

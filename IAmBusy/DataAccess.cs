@@ -15,7 +15,8 @@ namespace IAmBusy
         public const string defaultMessageText = "Текст по умолчанию";
         public StorageFolder storageFolder = null;
         public StorageFile storageFile = null;
-        public string messageText { get; set; }
+        public string messageText = null;
+        public static string mText;
 
 
         public async void ValidateFile()
@@ -40,27 +41,24 @@ namespace IAmBusy
 
         public async void ReadFromFile()
         {
-            //ValidateFile();
-            //storageFile = await storageFolder.GetFileAsync(fileName);
-
-         string fileContent;
-
-            try
-            {
-                fileContent = await FileIO.ReadTextAsync(storageFile);
-                this.messageText = fileContent;
-                //storageFolder = ApplicationData.Current.LocalFolder;
+            //StorageFolder sFolder = storageFolder;
+            
+          // try
+          //  {
+                
+                //storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 //storageFile = await storageFolder.GetFileAsync(fileName);
 
-            }
-            catch (FileNotFoundException)
-            {
-                CreateNewFile();
-
-
-            }
-
-            
+                messageText = await Windows.Storage.FileIO.ReadTextAsync(storageFile);
+                DataAccess.mText = await FileIO.ReadTextAsync(storageFile); ;
+                //sOutMesText = messageText;
+   
+          //  }
+          //  catch (FileNotFoundException)
+          //  {
+          //      CreateNewFile();
+          //  }
+          
 
         }
 
