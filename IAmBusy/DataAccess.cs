@@ -16,7 +16,8 @@ namespace IAmBusy
         public StorageFolder storageFolder = null;
         public StorageFile storageFile = null;
         public string messageText = null;
-        public static string mText;
+        
+       
 
 
         public async void ValidateFile()
@@ -43,21 +44,23 @@ namespace IAmBusy
         {
             //StorageFolder sFolder = storageFolder;
             
-          // try
-          //  {
+           try
+            {
                 
-                //storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                //storageFile = await storageFolder.GetFileAsync(fileName);
+                //storageFolder = ApplicationData.Current.LocalFolder;
+                storageFile = await storageFolder.GetFileAsync(fileName);
 
-                messageText = await Windows.Storage.FileIO.ReadTextAsync(storageFile);
-                DataAccess.mText = await FileIO.ReadTextAsync(storageFile); ;
+                string stemp = await FileIO.ReadTextAsync(storageFile);
+                messageText = stemp;
+
                 //sOutMesText = messageText;
    
-          //  }
-          //  catch (FileNotFoundException)
-          //  {
-          //      CreateNewFile();
-          //  }
+            }
+            catch (FileNotFoundException)
+            {
+                CreateNewFile();
+                Debug.WriteLine("Файл был создан");
+            }
           
 
         }

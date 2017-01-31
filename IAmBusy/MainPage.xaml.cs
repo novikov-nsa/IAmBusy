@@ -38,6 +38,13 @@ namespace IAmBusy
 
             dataAccess = new DataAccess();
             dataAccess.ValidateFile();
+            
+        }
+
+        
+
+        private void buttonReadFromFile_Click(object sender, RoutedEventArgs e)
+        {
             dataAccess.ReadFromFile();
             s = dataAccess.messageText;
             //s = DataAccess.mText;
@@ -45,9 +52,6 @@ namespace IAmBusy
             {
                 TextBoxMessagetext.Text = s;
             }
-            //DataAccess.defaultMessageText;
-            //
-
         }
     }
 }
