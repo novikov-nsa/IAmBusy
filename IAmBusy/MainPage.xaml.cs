@@ -38,7 +38,8 @@ namespace IAmBusy
 
             dataAccess = new DataAccess();
             dataAccess.ValidateFile();
-            
+            dataAccess.ReadFromFile();
+
         }
 
         
