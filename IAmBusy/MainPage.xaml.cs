@@ -54,5 +54,10 @@ namespace IAmBusy
                 TextBoxMessagetext.Text = s;
             }
         }
+
+        private void buttonStoreToFile_Click(object sender, RoutedEventArgs e)
+        {
+            dataAccess.StoreToFile(TextBoxMessagetext.Text);
+        }
     }
 }

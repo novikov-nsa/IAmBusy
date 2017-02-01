@@ -40,6 +40,20 @@ namespace IAmBusy
             await Windows.Storage.FileIO.WriteTextAsync(storageFile, defaultMessageText);
         }
 
+        public async void StoreToFile(string mtext)
+        {
+            try
+            {
+                storageFile = await storageFolder.GetFileAsync(fileName);
+                await Windows.Storage.FileIO.WriteTextAsync(storageFile, mtext);
+            }
+            catch (FileNotFoundException)
+            {
+                CreateNewFile();
+
+            }
+        }
+
         public async void ReadFromFile()
         {
             //StorageFolder sFolder = storageFolder;
