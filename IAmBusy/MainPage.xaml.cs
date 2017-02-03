@@ -39,6 +39,12 @@ namespace IAmBusy
             dataAccess = new DataAccess();
             dataAccess.ValidateFile();
             dataAccess.ReadFromFile();
+            s = dataAccess.messageText;
+            //s = DataAccess.mText;
+            if (s != null)
+            {
+                TextBoxMessagetext.Text = s;
+            }
 
         }
 
