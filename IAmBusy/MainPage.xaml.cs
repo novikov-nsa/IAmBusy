@@ -24,27 +24,21 @@ namespace IAmBusy
     {
         //public WorkWithFile configFile { get; set; }
         public DataAccess dataAccess;
+        public RecordingView viewModel;
         public string s;
         
         public MainPage()
         {
             this.InitializeComponent();
 
-            /*configFile = new WorkWithFile();
-            configFile.CheckFileIsExist();
-            //string fname = configFile.filename;
-            configFile.getTextFromFile(configFile.messageText);
-            this.TextBoxMessagetext.Text = configFile.messageTextFromFile;*/
-
             dataAccess = new DataAccess();
             dataAccess.ValidateFile();
             dataAccess.ReadFromFile();
-            s = dataAccess.messageText;
-            //s = DataAccess.mText;
-            if (s != null)
-            {
-                TextBoxMessagetext.Text = s;
-            }
+            viewModel = new RecordingView();
+
+            viewModel.MessageTextProp = dataAccess.messageText;
+
+           
 
         }
 
@@ -53,17 +47,20 @@ namespace IAmBusy
         private void buttonReadFromFile_Click(object sender, RoutedEventArgs e)
         {
             dataAccess.ReadFromFile();
-            s = dataAccess.messageText;
-            //s = DataAccess.mText;
-            if (s != null)
-            {
-                TextBoxMessagetext.Text = s;
-            }
+            viewModel.MessageTextProp = dataAccess.messageText;
+
         }
 
         private void buttonStoreToFile_Click(object sender, RoutedEventArgs e)
         {
-            dataAccess.StoreToFile(TextBoxMessagetext.Text);
+            dataAccess.StoreToFile(this.TextBoxMessagetext.Text);
+        }
+
+        private void buttonReadDefault_Click(object sender, RoutedEventArgs e)
+        {
+            dataAccess.StoreToFile(DataAccess.defaultMessageText);
+            viewModel.MessageTextProp = DataAccess.defaultMessageText;
+            
         }
     }
 }

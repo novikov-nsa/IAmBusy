@@ -6,6 +6,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using Windows.Storage;
+using System.Runtime.CompilerServices;
+
+
 
 namespace IAmBusy
 {
@@ -16,9 +19,13 @@ namespace IAmBusy
         public StorageFolder storageFolder = null;
         public StorageFile storageFile = null;
         public string messageText = null;
-        
-       
 
+        public DataAccess()
+        {
+            ValidateFile();
+            ReadFromFile();
+        }
+ 
 
         public async void ValidateFile()
         {
@@ -46,6 +53,7 @@ namespace IAmBusy
             {
                 storageFile = await storageFolder.GetFileAsync(fileName);
                 await Windows.Storage.FileIO.WriteTextAsync(storageFile, mtext);
+
             }
             catch (FileNotFoundException)
             {
@@ -66,6 +74,7 @@ namespace IAmBusy
 
                 string stemp = await FileIO.ReadTextAsync(storageFile);
                 messageText = stemp;
+                
 
                 //sOutMesText = messageText;
    
@@ -79,6 +88,36 @@ namespace IAmBusy
 
         }
 
+
+
+
+    }
+
+    public partial class RecordingView : INotifyPropertyChanged
+    {
+        private string textMessage;
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public string MessageTextProp
+        {
+            set
+            {
+                textMessage = value;
+                OnPropertyChanged();
+            }
+
+            get
+            {
+                return textMessage;
+            }
+        }
+
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            // Raise the PropertyChanged event, passing the name of the property whose value has changed.
+            this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
     }
 }

@@ -8,9 +8,13 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBox x:Name="TextBoxMessagetext" HorizontalAlignment="Left" Height="28" Margin="27,22,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="231"/>
-        <Button x:Name="buttonReadFromFile" Content="Читать из файла" HorizontalAlignment="Left" Margin="26,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.431,0.5" Width="232" Click="buttonReadFromFile_Click"/>
-        <Button x:Name="buttonStoreToFile" Content="Сохранить изменения" HorizontalAlignment="Left" Margin="27,156,0,0" VerticalAlignment="Top" Width="230" Click="buttonStoreToFile_Click"/>
+        <TextBox x:Name="TextBoxMessagetext" Height="28" Margin="8,22,8,0" TextWrapping="Wrap" Text="{x:Bind Path=viewModel.MessageTextProp, Mode=TwoWay}" VerticalAlignment="Top"/>
+        <ToggleSwitch x:Name="toggleSwitchRunAsService" Header="" HorizontalAlignment="Left" Margin="15,216,0,0" VerticalAlignment="Top"/>
+        <Grid Height="46" Margin="11,80,10,0" VerticalAlignment="Top" Grid.Column="3" Grid.ColumnSpan="3">
+            <Button x:Name="buttonStoreToFile" Content="Сохранить" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Stretch" Click="buttonStoreToFile_Click" Width="129" Grid.Column="1" Grid.Row="1"/>
+            <Button x:Name="buttonReadFromFile" Content="Прочитать" HorizontalAlignment="Stretch" Margin="14,5,476,0" VerticalAlignment="Stretch" Click="buttonReadFromFile_Click" Width="129" Grid.Column="2"/>
+            <Button x:Name="buttonReadDefault" Content="По умолчанию" HorizontalAlignment="Stretch" Margin="700,0,55,10" VerticalAlignment="Stretch" Width="129" Click="buttonReadDefault_Click" Grid.Column="3"/>
+        </Grid>
 
     </Grid>
 </Page>
