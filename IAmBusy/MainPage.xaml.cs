@@ -63,5 +63,11 @@ namespace IAmBusy
             viewModel.MessageTextProp = DataAccess.defaultMessageText;
             
         }
+
+        private void onLoaded(object sender, RoutedEventArgs e)
+        {
+            dataAccess.ReadFromFile();
+            viewModel.MessageTextProp = dataAccess.messageText;
+        }
     }
 }

@@ -62,11 +62,17 @@ namespace IAmBusy
             
            try
             {
-                
+                string stemp;
                 //storageFolder = ApplicationData.Current.LocalFolder;
                 storageFile = await storageFolder.GetFileAsync(fileName);
 
-                string stemp = await FileIO.ReadTextAsync(storageFile);
+                //string stemp = await FileIO.ReadTextAsync(storageFile);
+                var buffer = await FileIO.ReadBufferAsync(storageFile);
+                using (var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(buffer))
+                {
+                    stemp = dataReader.ReadString(buffer.Length);
+                }
+
                 messageText = stemp;
                 
 
