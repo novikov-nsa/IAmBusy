@@ -20,12 +20,6 @@ namespace IAmBusy
         public StorageFile storageFile = null;
         public string messageText = null;
 
-        public DataAccess()
-        {
-            ValidateFile();
-            ReadFromFile();
-        }
- 
 
         public async void ValidateFile()
         {

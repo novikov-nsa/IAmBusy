@@ -32,13 +32,14 @@ namespace IAmBusy
             this.InitializeComponent();
 
             dataAccess = new DataAccess();
-            dataAccess.ValidateFile();
-            dataAccess.ReadFromFile();
             viewModel = new RecordingView();
 
+            dataAccess.ValidateFile();
+            dataAccess.ReadFromFile();
             viewModel.MessageTextProp = dataAccess.messageText;
+            
 
-           
+
 
         }
 
